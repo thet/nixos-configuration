@@ -34,6 +34,8 @@
 
   # List services that you want to enable:
 
+  programs.ssh.startAgent = false;  # let's use gnuPGAgent
+
   # Enable the X11 windowing system.
   services = {
     # openssh.enable = true;
@@ -42,6 +44,7 @@
       enable = true;
       layout = "us";
       xkbOptions = "eurosign:e";
+      startGnuPGAgent = true;
       synaptics = {
         enable = true;
         palmDetect = true;
@@ -58,7 +61,6 @@
       # };
       windowManager.awesome.enable = true;
       displayManager.slim.enable = true;
-      displayManager.slim.defaultUser = "thet";
       desktopManager.gnome3.enable = true;
     };
   };
@@ -66,9 +68,15 @@
   nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.thet = {
+  users.groups.thet = {
+    name = "thet";
+    gid = 1000;
+  };
+  users.users.thet = {
     isNormalUser = true;
     uid = 1000;
+    group = "users";
+    extraGroups = ["thet"];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -96,6 +104,7 @@
     redshift
     ranger
     arandr
+    # gimp
 
     # vim
     vimHugeX
@@ -114,16 +123,13 @@
     automake
     bazaar
     bazaarTools
-    bc
     cmake
     colordiff
     cpufrequtils
     ctags
-    ddrescue
     file
     gcc
     gdb
-    gimp
     gitAndTools.gitFull
     gitAndTools.svn2git
     gitAndTools.tig
@@ -134,7 +140,6 @@
     hdparm
     htop
     imagemagick
-    io
     lsof
     lua
     mercurial
@@ -154,7 +159,7 @@
     subversion
     tcpdump
     telnet
-    texLiveFull
+    # texLiveFull
     unetbootin
     unzip
     vlc
@@ -170,6 +175,17 @@
     xorg.xmodmap
     zip
     zsh
+
+    gnome3.gnome_session
+    gnome3.gnome-disk-utility
+    paper-gtk-theme
+
+    nodejs
+    python27Packages.virtualenv
+
+    # termit
+    libvterm
+    gnome3.gtk
 
   ];
 
