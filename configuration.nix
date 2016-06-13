@@ -58,6 +58,7 @@
       # };
       windowManager.awesome.enable = true;
       displayManager.slim.enable = true;
+      displayManager.slim.defaultUser = "thet";
       desktopManager.gnome3.enable = true;
     };
   };
@@ -87,56 +88,108 @@
 
   environment.systemPackages = with pkgs; [
 
+    # apps
     firefox
     chromium
-
-    # utils
+    vlc
+    skype
     redshift
-    xorg.xmodmap
-    xorg.xbacklight
     ranger
     arandr
-    networkmanager
-    networkmanagerapplet
 
-    # multimedia
-    alsaLib
-    alsaUtils
-    alsaPlugins
-    pavucontrol
-    vlc
-
-    # dev
-    python
-    lua
+    # vim
     vimHugeX
-    ctags
-    git
-    gitAndTools.tig
     qvim
     neovim
     neovim-pygui
     neovim-qt
 
-    # cmd line tools
-    which
-    wget
+    # system
+    acpitool
+    alsaLib
+    alsaPlugins
+    alsaUtils
+    ant
+    autoconf
+    automake
+    bazaar
+    bazaarTools
+    bc
+    cmake
+    colordiff
+    cpufrequtils
+    ctags
+    ddrescue
+    file
+    gcc
+    gdb
+    gimp
+    gitAndTools.gitFull
+    gitAndTools.svn2git
+    gitAndTools.tig
+    gnumake
+    gnupg
+    graphviz
+    gv
+    hdparm
     htop
+    imagemagick
+    io
+    lsof
+    lua
+    mercurial
+    netcat
+    networkmanager
+    networkmanagerapplet
+    nmap
+    openvpn
+    p7zip
+    parted
+    pavucontrol
+    powertop
+    python
+    ruby
+    screen
+    sdparm
+    subversion
+    tcpdump
+    telnet
+    texLiveFull
+    unetbootin
     unzip
+    vlc
+    wget
+    which
+    wpa_supplicant_gui
+    xfontsel
+    xorg.xbacklight
+    xorg.xev
+    xorg.xinput
+    xorg.xkill
+    xorg.xmessage
+    xorg.xmodmap
+    zip
+    zsh
 
   ];
 
-  #fonts = {
-  #  enableFontDir = true;
-  #  enableGhostscriptFonts = true;
-  #  extraFonts = [
-  #     pkgs.terminus_font
-  #     pkgs.anonymousPro
-  #     pkgs.corefonts
-  #     pkgs.freefont_ttf
-  #     pkgs.ttf_bitstream_vera
-  #     pkgs.ttf_bitstream_vera_for_powerline
-  #  ];
-  #};
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    extraFonts = [
+       pkgs.ubuntu_font_family
+       pkgs.terminus_font
+       pkgs.anonymousPro
+       pkgs.corefonts
+       pkgs.freefont_ttf
+       pkgs.ttf_bitstream_vera
+       # pkgs.ttf_bitstream_vera_for_powerline
+       pkgs.cantarell_fonts
+       pkgs.dejavu_fonts
+       pkgs.dosemu_fonts
+       pkgs.liberation_ttf
+       # pkgs.unifont
+    ];
+  };
 
 }
