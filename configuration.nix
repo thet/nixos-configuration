@@ -9,13 +9,12 @@
     ];
 
   # Use the gummiboot efi boot loader.
-  boot.loader.grub.enable = false;
   boot.loader.gummiboot.enable = true;
   boot.loader.gummiboot.timeout = 2;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "luft"; # Define your hostname.
-  networking.connman.enable = true;  # Enables wireless.
+  networking.hostName = "thetair";     # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties.
   # i18n = {
@@ -24,138 +23,108 @@
   #   defaultLocale = "en_US.UTF-8";
   # };
 
+  # Set your time zone.
+  time.timeZone = "Europe/Vienna";
+
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  # environment.systemPackages = with pkgs; [
+  #   wget
+  # ];
+
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable the X11 windowing system.
   services = {
+    # openssh.enable = true;
+    printing.enable = true;
     xserver = {
       enable = true;
-      #layout = 'us';
-      synaptics.enable = true;
+      layout = "us";
+      xkbOptions = "eurosign:e";
+      synaptics = {
+        enable = true;
+        palmDetect = true;
+        tapButtons = false;
+        twoFingerScroll = true;
+      };
+      # libinput = {
+      #   enable = false;
+      #   disableWhileTyping = true;
+      #   naturalScrolling = true;
+      #   tapping = false;
+      #  # scrollMethod = 'twofinger';
+      #   horizontalScrolling = true;
+      # };
       windowManager.awesome.enable = true;
-      displayManager.slim.enable = true;		
-      desktopManager.xfce.enable = true;
+      displayManager.slim.enable = true;
+      desktopManager.gnome3.enable = true;
     };
   };
   hardware.opengl.videoDrivers = [ "intel" ];
-  # services.xserver.xkbOptions = "eurosign:e";
-
   nixpkgs.config.allowUnfree = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.extraUsers.thet = {
+    isNormalUser = true;
+    uid = 1000;
+  };
+
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.stateVersion = "16.03";
 
   environment = {
     interactiveShellInit = ''
         export EDITOR="vim"
-        export EMAIL=johannes@raggam.co.at
+        export EMAIL=johannes@raggam.at
         export FULLNAME="Johannes Raggam"
         export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
-        export NODE_PATH=$HOME/.node_modules
+        export NODE_PATH=$HOME/node_modules
     '';
-    systemPackages = with pkgs; [
-
-      "vimHugeX"
-      "connmanui"
-      "xlibs.xmodmap"
-      "pavucontrol"
-      "xbacklight"
-      "python2.7-ranger"
-      "python2.7-arandr"
-
-      "alsa-lib"
-      "alsa-utils"
-      "alsa-plugins"
-        
-
-      # uncategorized
-      #redshift
-      #msmtp
-      #notmuch
-      #offlineimap
-      #pythonPackages.alot
-      #pythonPackages.afew
-      #dunst
-      #libnotify
-      #i3lock
-      #i3status
-      #dmenu
-      #scrot
-      #vifm
-      #rxvt_unicode
-      #xsel
-      #pa_applet
-      #gnome.gnome_keyring
-      #stdenv
-      #virtmanager
-
-      # nix related tools
-      #nixops
-
-      # cmd line tools
-      "which"
-      "wget"
-      "htop"
-      "unrar"
-      "unzip"
-      # "pythonPackages.ipython"
-      "mosh"
-
-      # console programs
-      #weechat
-      #cmus
-
-      # version control
-      # "subversion"
-      # "mercurialFull"
-      # "bazaar"
-      # "bazaarTools"
-      "gitFull"
-      "gitAndTools.tig"
-
-      # editor and their tools
-      #emacs24
-      #emacs24Packages.org
-      #emacs24Packages.offlineimap
-      #emacs24Packages.notmuch
-      # needed for vim's syntastic
-      #phantomjs
-      # "pythonPackages.flake8"
-      #pythonPackages.docutils
-      #htmlTidy
-      #csslint
-      #xmllint
-      #zptlint
-      "ctags"
-
-      # browsers
-      "chromiumWrapper"
-      "firefoxWrapper"
-      # "opera"
-
-      # programs
-      #gitAndTools.gitAnnex
-      #zathura
-      # "skype"
-      "mplayer2"
-      #dropbox
-      #gftp
-      #calibre
-      #gnucash
-      #gimp_2_8
-      #inkscape
-      #libreoffice
-
-      # hacking tools
-      #wireshark
-      #aircrackng
-
-
-    ];
   };
+
+  # environment.gnome3.packageSet = pkgs.gnome3_20;
+
+  environment.systemPackages = with pkgs; [
+
+    firefox
+    chromium
+
+    # utils
+    redshift
+    xorg.xmodmap
+    xorg.xbacklight
+    ranger
+    arandr
+    networkmanager
+    networkmanagerapplet
+
+    # multimedia
+    alsaLib
+    alsaUtils
+    alsaPlugins
+    pavucontrol
+    vlc
+
+    # dev
+    python
+    lua
+    vimHugeX
+    ctags
+    git
+    gitAndTools.tig
+    qvim
+    neovim
+    neovim-pygui
+    neovim-qt
+
+    # cmd line tools
+    which
+    wget
+    htop
+    unzip
+
+  ];
 
   #fonts = {
   #  enableFontDir = true;
