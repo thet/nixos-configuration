@@ -16,25 +16,25 @@
     { mountPoint = "/";
       device = "/dev/disk/by-label/nixos";  # /dev/sda8
       fsType = "ext4";
-      options = "rw,relatime";
+      options = [ "rw" "relatime" ];
     }
     { mountPoint = "/boot";
       device = "/dev/disk/by-uuid/ACE9-6C8E";  # /dev/sda7
       fsType = "vfat";
-      options = "rw,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro,relatime";
+      options = [ "rw" "fmask=0022" "dmask=0022" "codepage=437" "iocharset=iso8859-1" "shortname=mixed" "errors=remount-ro" "relatime" ];
     }
     { mountPoint = "/home";
       device = "/dev/disk/by-label/home";  # /dev/sda9
-      options = "defaults,relatime";
+      options = [ "defaults" "relatime" ];
     }
     { mountPoint = "/home/mail";
       device = "/dev/disk/by-label/mail";
-      options = "defaults,relatime";
+      options = [ "defaults" "relatime" ];
     }
     { mountPoint = "/tmp";
       device = "tmpfs";
       fsType = "tmpfs";
-      options = "nosuid,nodev,relatime";
+      options = [ "nosuid" "nodev" "relatime" ];
     }
   ];
   swapDevices = [
