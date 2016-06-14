@@ -34,7 +34,11 @@
 
   # List services that you want to enable:
 
-  programs.ssh.startAgent = false;  # let's use gnuPGAgent
+  programs = {
+    ssh.startAgent = true;
+    ssh.forwardX11 = false;
+    bash.enableCompletion = true;
+  };
 
   # Enable the X11 windowing system.
   services = {
@@ -44,24 +48,31 @@
       enable = true;
       layout = "us";
       xkbOptions = "eurosign:e";
-      startGnuPGAgent = true;
-      synaptics = {
-        enable = true;
-        palmDetect = true;
-        tapButtons = false;
-        twoFingerScroll = true;
-      };
-      # libinput = {
-      #   enable = false;
-      #   disableWhileTyping = true;
-      #   naturalScrolling = true;
-      #   tapping = false;
-      #  # scrollMethod = 'twofinger';
-      #   horizontalScrolling = true;
+      # synaptics = {
+      #   enable = true;
+      #   palmDetect = true;
+      #   tapButtons = false;
+      #   twoFingerScroll = true;
       # };
+      libinput = {
+        enable = true;
+        disableWhileTyping = true;
+        naturalScrolling = true;
+        tapping = false;
+        # scrollMethod = 'twofinger';
+        horizontalScrolling = true;
+      };
       windowManager.awesome.enable = true;
       displayManager.slim.enable = true;
       desktopManager.gnome3.enable = true;
+    };
+    gnome3 = {
+        evolution-data-server.enable = true;
+        gnome-documents.enable = true;
+        gnome-keyring.enable = true;
+        gnome-online-accounts.enable = true;
+        gvfs.enable = true;
+        sushi.enable = true;
     };
   };
   hardware.opengl.videoDrivers = [ "intel" ];
@@ -115,6 +126,7 @@
 
     # system
     acpitool
+    ag
     alsaLib
     alsaPlugins
     alsaUtils
@@ -181,7 +193,24 @@
     paper-gtk-theme
 
     nodejs
+    python27Full
     python27Packages.virtualenv
+    python27Packages.pip
+    libxml2Python
+    libxml2
+    libxslt
+    libjpeg
+    libpng
+    libzip
+    zlib
+    stdenv
+    giflib
+    libtiff
+    python27Packages.recursivePthLoader
+    gparted
+    nox
+    pidgin
+    pidgin-otr
 
     # termit
     libvterm
