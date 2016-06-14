@@ -43,7 +43,6 @@
   # Enable the X11 windowing system.
   services = {
     # openssh.enable = true;
-    printing.enable = true;
     xserver = {
       enable = true;
       layout = "us";
@@ -74,6 +73,8 @@
         gvfs.enable = true;
         sushi.enable = true;
     };
+    locate.enable = true;
+    printing.enable = true;
   };
   hardware.opengl.videoDrivers = [ "intel" ];
   nixpkgs.config.allowUnfree = true;
@@ -211,6 +212,8 @@
     nox
     pidgin
     pidgin-otr
+    man
+    stdmanpages
 
     # termit
     libvterm
