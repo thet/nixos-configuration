@@ -197,23 +197,13 @@
     python27Full
     python27Packages.virtualenv
     python27Packages.pip
-    libxml2Python
-    libxml2
-    libxslt
-    libjpeg
-    libpng
-    libzip
-    zlib
-    stdenv
-    giflib
-    libtiff
-    python27Packages.recursivePthLoader
     gparted
     nox
     pidgin
-    pidgin-otr
+    pidginotr
     man
     stdmanpages
+    efibootmgr
 
     # termit
     libvterm
