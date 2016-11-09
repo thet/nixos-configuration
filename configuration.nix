@@ -8,9 +8,9 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the gummiboot efi boot loader.
-  boot.loader.gummiboot.enable = true;
-  boot.loader.gummiboot.timeout = 2;
+  # Use the systemd efi boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 2;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "thetair";     # Define your hostname.
@@ -62,8 +62,10 @@
         horizontalScrolling = true;
       };
       windowManager.awesome.enable = true;
+      # displayManager.gdm.enable = true;
       displayManager.slim.enable = true;
       desktopManager.gnome3.enable = true;
+      videoDrivers = [ "intel" ];
     };
     gnome3 = {
         evolution-data-server.enable = true;
@@ -76,7 +78,6 @@
     locate.enable = true;
     printing.enable = true;
   };
-  hardware.opengl.videoDrivers = [ "intel" ];
   nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -194,9 +195,9 @@
     paper-gtk-theme
 
     nodejs
-    python27Full
-    python27Packages.virtualenv
-    python27Packages.pip
+    # python27Full
+    # python27Packages.virtualenv
+    # python27Packages.pip
     gparted
     nox
     pidgin
@@ -214,7 +215,7 @@
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
-    extraFonts = [
+    fonts = [
        pkgs.ubuntu_font_family
        pkgs.terminus_font
        pkgs.anonymousPro
